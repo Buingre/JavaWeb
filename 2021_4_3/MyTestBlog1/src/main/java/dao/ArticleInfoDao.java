@@ -63,4 +63,20 @@ public class ArticleInfoDao {
         return result;
     }
 
+    public  int addArt(String title,String content,int uid) throws SQLException {
+        int result = 0;
+        //数据库经典操作
+        Connection connection = DBUtils.getConnect();
+        String sql = "insert into articleinfo(title,content,uid) values(?,?,?)";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, title);
+        statement.setString(2, content);
+        statement.setInt(3, uid);
+        //真正的操作现在开始
+        result  = statement.executeUpdate();
+        //关闭连接
+        DBUtils.close(connection,statement,null);
+
+        return result;
+    }
 }
