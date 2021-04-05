@@ -1,7 +1,9 @@
 package service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.UserInfoDao;
 import models.UserInfo;
+import utils.ResultJSONUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 /**
  *
@@ -59,6 +62,12 @@ public class RegServlet extends HttpServlet {
         //{"state":100,"msg":"msg"}
         //writer.println("{\"state\":"+state+",\"msg\":\""+msg+"\"}");
         //todo:hashmap-->字符串
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("state", state);
+        result.put("msg", msg);
+        ObjectMapper mapper = new ObjectMapper();
+        // 调用统一的输出方法进行输出
+        ResultJSONUtils.write(response, mapper.writeValueAsString(result));
 
 
 

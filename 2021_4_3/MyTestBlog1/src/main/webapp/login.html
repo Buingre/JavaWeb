@@ -23,9 +23,10 @@
                     username.val("");
                     password.val("");
                 }
+                return false;
             }
             //进入登录操作
-            //非空校验
+            //1.非空校验
             if(username.val().trim()==""){
                 alert("请先输入用户名！");
                 username.focus();
@@ -36,13 +37,17 @@
                 password.focus();
                 return false;
             }
-            //和后端进行通信
+            //和后端进行通信.
+            //--》将信息提交给login
+            //--》
             jQuery.getJSON("login",{
                 "username": username.val(),
                 "password": password.val()
             },function (data) {//回调函数
                 if(data != null && data.state == 200){
-                    // todo:后面在写跳转页面
+                    // 写跳转页面
+                    location.href = "articlelist.html"
+
                     alert("恭喜：登录成功");
                 } else {
                     alert("用户名或密码错误，请重新输入");
