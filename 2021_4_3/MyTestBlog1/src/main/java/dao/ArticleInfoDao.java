@@ -38,6 +38,29 @@ public class ArticleInfoDao {
             articleInfo.setRcount(resultSet.getInt("rcount"));
             list.add(articleInfo);
         }
+        //todo:关闭连接
+        DBUtils.close(connection,statement,resultSet);
         return list;
     }
+
+    /**
+     * 删除文章的数据库操作
+     * @param id
+     * @return
+     */
+    public int delArtileById(int id) throws SQLException {
+        int result = 0;
+        //数据库经典操作
+        Connection connection = DBUtils.getConnect();
+        String sql = "delete from articleinfo where id=?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1,id);
+        //真正的操作现在开始
+        result = statement.executeUpdate();//会返回影响的行数
+        //关闭数据库连接
+        DBUtils.close(connection,statement,null);
+
+        return result;
+    }
+
 }

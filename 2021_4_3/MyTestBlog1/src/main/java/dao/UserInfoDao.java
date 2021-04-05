@@ -56,7 +56,8 @@ public class UserInfoDao {
             if(resultSet.next()){//如果有这个值的话  if为true
                 result = true;
             }
-
+            // 关闭连接
+            DBUtils.close(connection, statement, resultSet);
         }
 
 
@@ -75,14 +76,16 @@ public class UserInfoDao {
         UserInfo user = new UserInfo();
         //todo:如果出问题可能是这里的问题
         // 还是要非空校验
+        Connection connection = DBUtils.getConnect();
+        String sql = "select * from userinfo where username=? and password=? and state = 1";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = null;
         if(userInfo.getUsername()!=null && userInfo.getPassword()!=null
                 && !userInfo.getUsername().equals("") && !userInfo.getPassword().equals("")){
-            Connection connection = DBUtils.getConnect();
-            String sql = "select * from userinfo where username=? and password=? and state = 1";
-            PreparedStatement statement = connection.prepareStatement(sql);
+
             statement.setString(1,userInfo.getUsername());
             statement.setString(2,userInfo.getPassword());
-            ResultSet resultSet = statement.executeQuery();
+             resultSet = statement.executeQuery();
             if (resultSet.next()){
                 //在这里获取到的id，并设置id
                 user.setId(resultSet.getInt("id"));
@@ -90,9 +93,8 @@ public class UserInfoDao {
                 user.setPassword(resultSet.getString("password"));
             }
         }
-        Connection connection = DBUtils.getConnect();
-
-
+        // 关闭连接
+        DBUtils.close(connection, statement, resultSet);
         return user;
     }
 

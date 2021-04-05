@@ -34,7 +34,15 @@
     <servlet-name>myartlist</servlet-name>
     <url-pattern>/myartlist</url-pattern>
   </servlet-mapping>
-
+  <!-- 文章删除接口 -->
+  <servlet>
+    <servlet-name>mydel</servlet-name>
+    <servlet-class>service.MyDelServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>mydel</servlet-name>
+    <url-pattern>/mydel</url-pattern>
+  </servlet-mapping>
 
 </web-app>
 
