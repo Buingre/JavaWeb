@@ -63,6 +63,14 @@ public class ArticleInfoDao {
         return result;
     }
 
+    /**
+     * 添加文章的数据库操作
+     * @param title
+     * @param content
+     * @param uid
+     * @return
+     * @throws SQLException
+     */
     public  int addArt(String title,String content,int uid) throws SQLException {
         int result = 0;
         //数据库经典操作
@@ -78,5 +86,55 @@ public class ArticleInfoDao {
         DBUtils.close(connection,statement,null);
 
         return result;
+    }
+
+    /**
+     * 文章修改。要有文章的id!!
+     * @param title
+     * @param content
+     * @param id
+     * @return
+     */
+    public int updateArt(String title, String content, int uid,int id) throws SQLException {
+        int result = 0;
+        //JDBC经典4步
+        Connection connection = DBUtils.getConnect();
+        String sql = "update articleinfo set title=?,content=? where id=? and uid=?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1,title);
+        statement.setString(2,content);
+        statement.setInt(3,id);
+        statement.setInt(4,uid);
+        //真正的操作就要开始
+        result = statement.executeUpdate();
+        //关闭连接
+        DBUtils.close(connection,statement,null);
+
+        return result;
+    }
+
+
+    /**
+     * 文章查询方法：在文章修改之前先展示本文章的内容
+     * @param id
+     * @return
+     * @throws SQLException
+     */
+    public ArticleInfo getArtById(int id) throws SQLException {
+        ArticleInfo articleInfo =new ArticleInfo();
+        //JDBC经典4步
+        Connection connection = DBUtils.getConnect();
+        String sql = "select * from articleinfo where id=?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1,id);
+        //真正的操作就要开始
+        ResultSet resultSet  = statement.executeQuery();
+        if(resultSet.next()){
+            articleInfo.setTitle(resultSet.getString("title"));
+            articleInfo.setContent(resultSet.getString("content"));
+        }
+        //关闭连接
+        DBUtils.close(connection,statement,resultSet);
+        return articleInfo;
     }
 }

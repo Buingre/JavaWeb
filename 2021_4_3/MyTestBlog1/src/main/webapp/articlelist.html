@@ -5,10 +5,10 @@
     <title>我的文章列表页</title>
     <script src="jquery-1.9.1.min.js"></script>
     <script>
-        //文章删除操作
+        //文章删除操作【接受前端页面要删除的文章id】
         function mydel(id){
             if(confirm("确定删除文章？")){
-                //todo:请求后端接口删除响应的数据  已经做了
+                //todo:请求后端接口 删除响应的数据  --已经做了
                 jQuery.getJSON("mydel",{"id":id},function (data) {
                         if(data!=null && data.succ == 1){
                             alert("恭喜：操作成功！");
@@ -29,8 +29,7 @@
             //请求的地址"myartlist"，uid不需要在这里传，是在session里边传
             jQuery.getJSON("myartlist", {},
                 function (data) {
-                    if (data != null && data.list != null &&
-                        data.list.length > 0) {
+                    if (data != null && data.list != null) {
                         //先对table进行重置
                         // table 数据初始化
                         //给table设置html
@@ -69,7 +68,9 @@
                                 articleinfo.rcount + "                \n" +
                                 "            </td>\n" +
                                 "            <td>\n" +
-                                "                修改 <a href='javascript:mydel("+articleinfo.id+");'>删除</a>\n" +//todo:后边加js事件
+                                "                <a href='updateart.html?id=" + articleinfo.id
+                                + "'>修改</a>" +
+                                " <a href='javascript:mydel("+articleinfo.id+");'>删除</a>\n" +
                                 "            </td>\n" +
                                 "        </tr>";
                         }

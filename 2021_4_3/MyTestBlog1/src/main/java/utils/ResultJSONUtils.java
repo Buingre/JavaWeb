@@ -22,7 +22,7 @@ public class ResultJSONUtils {
      */
     public static void write(HttpServletResponse response, String jsonStr) throws IOException {
         response.setCharacterEncoding("utf-8");
-        response.setContentType("appliction/text");
+        response.setContentType("appliction/json");
         PrintWriter writer = response.getWriter();
         writer.println(jsonStr);
 

@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1"
-         metadata-complete="true">
-
+         metadata-complete="false">
+<!--部分路由:metadata-complete="false"  -->
 <!-- 注册接口 -->
   <servlet>
     <servlet-name>reg</servlet-name>
@@ -53,6 +53,28 @@
     <servlet-name>addart</servlet-name>
     <url-pattern>/addart</url-pattern>
   </servlet-mapping>
+
+  <!-- 修改文章 -->
+  <servlet>
+    <servlet-name>updateart</servlet-name>
+    <servlet-class>service.UpdateArtServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateart</servlet-name>
+    <url-pattern>/updateart</url-pattern>
+  </servlet-mapping>
+  <!-- 文章修改初始化接口 -->
+  <servlet>
+    <servlet-name>initupdateart</servlet-name>
+    <servlet-class>service.InitUpdateArtServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>initupdateart</servlet-name>
+    <url-pattern>/initupdateart</url-pattern>
+  </servlet-mapping>
+
+
+
 
 </web-app>
 

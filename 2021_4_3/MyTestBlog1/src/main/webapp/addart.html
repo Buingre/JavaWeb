@@ -30,7 +30,7 @@
             }
             //2.将数据提交给后端
             jQuery.getJSON("addart",{"title":title.val(),"content":content.val()},
-                function (data) {
+                function (data) {//回调函数
                 if(data!=null && data.succ==1){
                     alert("添加成功！");
                 }else {
