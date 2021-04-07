@@ -1,6 +1,7 @@
 package dao;
 
 import models.ArticleInfo;
+import models.vo.ArticleInfoVO;
 import utils.DBUtils;
 
 import java.sql.Connection;
@@ -136,5 +137,29 @@ public class ArticleInfoDao {
         //关闭连接
         DBUtils.close(connection,statement,resultSet);
         return articleInfo;
+    }
+
+    /**
+     * 获取所有人的文章列表
+     * @return
+     */
+    public List<ArticleInfoVO> getList() throws SQLException {
+        List<ArticleInfoVO> list = new ArrayList<>();
+        Connection connection = DBUtils.getConnect();
+        String sql = "select a.*,u.username from articleinfo a left join userinfo u on a.uid=u.id";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();
+        //多行数据用 while
+        while (resultSet.next()){
+            ArticleInfoVO vo = new ArticleInfoVO();
+            vo.setId(resultSet.getInt("id"));
+            vo.setUsername(resultSet.getString("username"));
+            vo.setTitle(resultSet.getString("title"));
+            vo.setRcount(resultSet.getInt("rcount"));
+            vo.setCreatetime(resultSet.getDate("createtime"));
+            list.add(vo);
+        }
+        DBUtils.close(connection, statement, resultSet);
+        return list;
     }
 }
