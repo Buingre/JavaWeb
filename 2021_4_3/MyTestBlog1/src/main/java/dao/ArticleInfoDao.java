@@ -162,4 +162,32 @@ public class ArticleInfoDao {
         DBUtils.close(connection, statement, resultSet);
         return list;
     }
+
+    /**
+     *根据分页查询文章列表
+     * @param cpage
+     * @param psize
+     * @return
+     */
+    public List<ArticleInfoVO> getListByPage(int cpage, int psize) throws SQLException {
+        List<ArticleInfoVO> list = new ArrayList<>();
+        Connection connection = DBUtils.getConnect();
+        String sql = "select a.*,u.username from articleinfo a left join userinfo u on a.uid=u.id limit ?,?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        //todo:自己推倒的公式
+        statement.setInt(1, (cpage - 1) * psize);
+        statement.setInt(2, psize);
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            ArticleInfoVO vo = new ArticleInfoVO();
+            vo.setId(resultSet.getInt("id"));
+            vo.setUsername(resultSet.getString("username"));
+            vo.setTitle(resultSet.getString("title"));
+            vo.setRcount(resultSet.getInt("rcount"));
+            vo.setCreatetime(resultSet.getDate("createtime"));
+            list.add(vo);
+        }
+        DBUtils.close(connection, statement, resultSet);
+        return list;
+    }
 }

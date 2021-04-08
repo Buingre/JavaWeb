@@ -3,7 +3,7 @@ package models.vo;
 import models.ArticleInfo;
 
 /**
- * 因为联合查询  基础类没有哪个属性
+ * 因为联合查询  基础类ArticleInfo没有username属性
  */
 public class ArticleInfoVO extends ArticleInfo {
     private String username;
