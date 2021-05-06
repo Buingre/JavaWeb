@@ -5,7 +5,7 @@ package test.thread0424;
  * 使用两个线程打印AABBCCDD
  * 每个线程只能打印ABCD
  *
- * todo:老师的方法
+ * todo:老师的方法，在下面
  */
 public class Test1 {
 
@@ -48,6 +48,42 @@ public class Test1 {
             }
 
         });
+        t2.start();
+
+        t1.join();
+        t2.join();
+
+    }
+
+}
+
+/**
+ * 老师的答案
+ */
+class ThreadDemo14 {
+    private static final String str = "ABCD";
+
+    static class MyRunnable implements Runnable {
+        @Override
+        public void run() {
+            for (char item : str.toCharArray()) {
+                System.out.print(item);
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static void main2(String[] args) throws InterruptedException {
+
+        MyRunnable myRunnable = new MyRunnable();
+        Thread t1 = new Thread(myRunnable);
+        t1.start();
+
+        Thread t2 = new Thread(myRunnable);
         t2.start();
 
         t1.join();

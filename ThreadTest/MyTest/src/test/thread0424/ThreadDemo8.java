@@ -21,12 +21,12 @@ public class ThreadDemo8 {
         }
     }
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        //1.
+        //1.创建 Callable 子对象
         MyCallable myCallable = new MyCallable();
-        //2.
+        //2.使用 FutrueTask 接收 Callable
         //一个容器而已
         FutureTask<Integer> futureTask = new FutureTask<>(myCallable);
-        //3.
+        //3.创建线程并设置任务
         Thread thread = new Thread(futureTask);
         //执行线程
         thread.start();

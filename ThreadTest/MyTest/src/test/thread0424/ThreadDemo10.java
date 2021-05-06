@@ -6,6 +6,7 @@ import java.util.concurrent.FutureTask;
 
 /**
  *  Thread常见构造方法---之---演示线程分组
+ *  todo:当前示例不太恰当，老师的新示例如下
  */
 public class ThreadDemo10 {
     //
@@ -49,5 +50,44 @@ public class ThreadDemo10 {
         //todo: 有get不加while也可，新示例见老师的
         int total = futureTask.get()+futureTask2.get();
         System.out.println("执行结果："+total);
+    }
+}
+
+class ThreadDemo10_Teacher {
+    public static void main(String[] args) {
+
+        ThreadGroup threadGroup = new ThreadGroup("group1");
+
+        Thread t1 = new Thread(threadGroup, new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                    System.out.println("选手1达到终点了~");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t1.start();
+
+        Thread t2 = new Thread(threadGroup, new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1200);
+                    System.out.println("选手2达到终点了~");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t2.start();
+
+        // 等待所有人员到达终点
+        while (threadGroup.activeCount() != 0) {
+        }
+
+        System.out.println("宣布比赛结果");
     }
 }
