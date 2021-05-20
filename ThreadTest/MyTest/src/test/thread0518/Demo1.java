@@ -7,9 +7,6 @@ import java.util.concurrent.Executors;
 /**
  * 【线程池的创建：7种方法，两种方式:Executors、】
  * 1.创建一个固定个数的线程池
- *
- * 3.创建可以执行定时任务的线程池
- * 4.
  **/
 public class Demo1 {
     public static void main(String[] args) {
