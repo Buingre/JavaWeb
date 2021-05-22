@@ -7,7 +7,7 @@ import java.util.concurrent.*;
  * 线程池执行的两种方式：无返回值execute(new Runnable..)、
  *                    有返回值的submit (Runnable 无返回值/Callable 有返回值)
  */
-public class Demo14 {
+public class Demo14两种执行方式 {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         ThreadPoolExecutor threadPoolExecutor =
                 new ThreadPoolExecutor(10,10,60, TimeUnit.SECONDS,new LinkedBlockingDeque<>(100));

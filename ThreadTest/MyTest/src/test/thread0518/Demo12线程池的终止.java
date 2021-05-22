@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 线程池的终止
  */
-public class Demo12 {
+public class Demo12线程池的终止 {
     public static void main(String[] args) throws InterruptedException {
         ThreadPoolExecutor threadPoolExecutor =
                 new ThreadPoolExecutor(5,5,60,

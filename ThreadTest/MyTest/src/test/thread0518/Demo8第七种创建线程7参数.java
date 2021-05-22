@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  *
  * TODO:7.【主角】原始 的线程池创建方式-->ThreadPoolExecutor
  */
-public class Demo8 {
+public class Demo8第七种创建线程7参数 {
     public static int count = 1;
 
     public static void main(String[] args) {
@@ -35,7 +35,7 @@ public class Demo8 {
         //      存活的时间（临时工的存活时间）、
         //      时间单位
         //      任务队列【一定要设置初始容量】
-        //      线程工厂【设置统一行为】
+        //      线程工厂【设置统一行为，如命名、优先级...】就算不设置，源码也会设置
         //      拒绝策略【jdk有四种，自己可以定义一个。总共5种】
 
         ThreadPoolExecutor threadPoolExecutor =

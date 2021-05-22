@@ -5,7 +5,7 @@ import java.util.concurrent.*;
 /**
  * 拒绝策略
  */
-public class Demo10 {
+public class Demo10拒绝策略 {
     public static int count = 1;
 
     public static void main(String[] args) {
@@ -21,7 +21,7 @@ public class Demo10 {
 
         //      拒绝策略【jdk有四种，自己可以定义一个。总共5种】
 
-        //【1.默认】
+        //【1.默认：不执行新来的任务，并且抛出异常】
         /*ThreadPoolExecutor threadPoolExecutor =
                 new ThreadPoolExecutor(1,1,60, TimeUnit.SECONDS,
                         new LinkedBlockingDeque<>(1),threadFactory,new ThreadPoolExecutor.AbortPolicy());*/
@@ -31,12 +31,12 @@ public class Demo10 {
                 new ThreadPoolExecutor(1,1,60, TimeUnit.SECONDS,
                         new LinkedBlockingDeque<>(1),threadFactory,new ThreadPoolExecutor.CallerRunsPolicy());*/
 
-        //【3.丢弃最老的任务】
+        //【3.丢弃最老的任务。不报错】
         ThreadPoolExecutor threadPoolExecutor =
                 new ThreadPoolExecutor(2,2,60, TimeUnit.SECONDS,
                         new LinkedBlockingDeque<>(8),threadFactory,new ThreadPoolExecutor.DiscardOldestPolicy());
 
-        //【4.丢弃最新加入的任务】
+        //【4.丢弃最新加入的任务。不报错】
 //        ThreadPoolExecutor threadPoolExecutor =
 //                new ThreadPoolExecutor(1,1,60, TimeUnit.SECONDS,
 //                        new LinkedBlockingDeque<>(8),threadFactory,new ThreadPoolExecutor.DiscardPolicy());

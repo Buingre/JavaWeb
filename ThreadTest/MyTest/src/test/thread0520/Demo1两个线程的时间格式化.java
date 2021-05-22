@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * 实现两个线程的时间格式化
  */
-public class Demo1 {
+public class Demo1两个线程的时间格式化 {
     public static void main(String[] args) {
         Thread t1 = new Thread(new Runnable() {
             @Override

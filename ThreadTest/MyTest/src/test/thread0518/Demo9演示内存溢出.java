@@ -6,7 +6,7 @@ import java.util.concurrent.Executors;
 /**
  * TODO:演示内存溢出
  */
-public class Demo9 {
+public class Demo9演示内存溢出 {
     static class MyOOMClass{
         //1M空间  M KB Nyte
         private static byte[] bytes= new byte[1*1024*1024];

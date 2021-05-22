@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  *                                                                当前线程池的数量=最大线程数 && 任务队列已满，此时会执行拒绝策略
  *
  */
-public class Demo11 {
+public class Demo11执行流程 {
     public static void main(String[] args) throws InterruptedException {
         ThreadPoolExecutor threadPoolExecutor =
                 new ThreadPoolExecutor(5,5,60,

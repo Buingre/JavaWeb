@@ -7,10 +7,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- *  *  * 实现1000个线程的时间格式化----------->使用线程池
+ * 线程安全的解决方案：【使用私有变量】【加锁】【ThreadLocal】
+ *                  使用ThreadLocal  OR  锁：就看创建实例对象之后的复用率的高低
+ *                todo:【ThreadLocal线程的本地变量:1000个任务，10个线程池的示例来说，使用ThreadLocal就是创建10 Simple】
  */
-public class Demo3 {
-    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+public class Demo4线程安全 {
     public static void main(String[] args) {
         ThreadPoolExecutor threadPoolExecutor =
                 new ThreadPoolExecutor(10,10,0, TimeUnit.SECONDS,new LinkedBlockingDeque<>(1000));
@@ -32,7 +33,9 @@ public class Demo3 {
      * 时间格式化方法
      * @param date
      */
-    private synchronized static void myFormatTime(Date date){
+    private static void myFormatTime(Date date){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+
         String res = simpleDateFormat.format(date);
         System.out.println(Thread.currentThread().getName()+" , 格式化时间："+res);
     }

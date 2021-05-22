@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  *  * 实现10个线程的时间格式化
  */
-public class Demo2 {
+public class Demo2十个线程的时间格式化 {
     public static void main(String[] args) {
         for (int i = 1; i <11 ; i++) {
             int finalI = i;
